@@ -26,7 +26,8 @@ async function productController(fastify,options)
                     expiry_date:req.body.expiry_date,
                     seller_id:req.user._id,
                     product_image:req.body.product_image,
-                    quality_certificate:req.body.quality_certificate
+                    quality_certificate:req.body.quality_certificate,
+                    location:req.body.location
                 }).save((err,newproduct)=>{
                   if(err)
                   {
