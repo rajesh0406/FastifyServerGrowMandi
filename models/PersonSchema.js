@@ -37,6 +37,21 @@ const PersonSchema =mongoose.Schema({
         type:ObjectId,
         ref:'product'
     }],
+    others_enquiry:[{
+        product_name:{
+            type:String,
+            required:true
+        },
+        message:{
+            type:String,
+            required:true
+        },
+        mobile_number:{
+            type:Number,
+            required:true
+
+        }
+    }],
     enquiry:[{
         product_name:{
             type:String,
@@ -50,6 +65,32 @@ const PersonSchema =mongoose.Schema({
             type:Number,
             required:true
 
+        }
+    }],
+    others_buy_request:[{
+        product_name:{
+            type:String,
+            required:true
+        },
+        mobile_number:{
+            type:Number,
+            required:true
+        },
+        cost:{
+            type:Number,
+            required:true
+        },
+        unit:{
+            type:String,
+            required:true
+        },
+        price_validity_date:{
+            type:String,
+            required:true
+        },
+        quality_terms:{
+            type:String,
+            default:"Good quality"
         }
     }],
     buy_request:[{
