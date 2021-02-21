@@ -56,35 +56,21 @@ async function RequestController(fastify,options){
         url:'/reply',
         preValidation:(req,res,done)=>authorize(req,res,done),
         handler:(req,res)=>{
-            Person.findByIdAndUpdate(req.body.sender_id,{$push:{
+            Person.findByIdAndUpdate("6030021ae7321000156014b0",{$pull:{
                 notifications:{
-                    _id:shortid.generate(),
-                    product_name:req.body.product_name,
-                    message:req.body.message,
-                    mobile_number:req.body.mobile_number,
-                    sender_id:req.user._id
+                    _id:'08p-x3UGJ'
                 }
-            }},{new:true}).exec((err,result)=>{
-                if(err)
+            }},{new:true}).exec((Err,result)=>{
+                if(Err)
                 {
-                    res.send({message:"Something went wrong"})
+                    res.send({message:'Something went wrong'})
                 }
                 else
                 {
-                    Person.findByIdAndUpdate(req.user._id,{$pull:{
-                        notifications:req.body._id
-                    }},{new:true}).then((errr,result)=>{
-                        if(errr)
-                        {
-                            res.send({message:'Something went wrong'})
-                        }
-                        else
-                        {
-                            res.send({message:"Reply sent"})
-                        }
-                    })
+                    res.send({message:'Pulled successfully'})
                 }
             })
+
         }
     })
     fastify.route({
