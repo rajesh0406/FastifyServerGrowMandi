@@ -21,16 +21,19 @@ async function RequestController(fastify,options){
                         message:req.body.message,
                         mobile_number:req.body.mobile_number 
                     }
-                }},{new:true}).exec({})
-                if(err)
-                {
-                    res.send({message:"Somethong went wrong"})
-                }
-                else
-                {
+                }},{new:true}).exec((eer,result)=>{
+                    if(eerr)
+                    {
+                        res.send({message:"Somethong went wrong"})
+                    }
+                    else
+                    {
+    
+                        res.send({message:"Enquiry sent"})
+                    }
 
-                    res.send({message:"Enquiry sent"})
-                }
+                })
+               
             })
         }
     })
