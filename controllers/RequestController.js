@@ -2,6 +2,7 @@ const mongoose=require('mongoose')
 const authorize=require('../middleware/authorize');
 const Person=require('../models/PersonSchema');
 const Product=require('../models/ProductSchema');
+const shortid = require('shortid')
 async function RequestController(fastify,options){
     fastify.route({
         method:'POST',
@@ -10,6 +11,7 @@ async function RequestController(fastify,options){
         handler:(req,res)=>{
             Person.findByIdAndUpdate(req.body.seller_id,{$push:{
                 notifications:{
+                    _id:shortid.generate(),
                     product_name:req.body.product_name,
                     message:req.body.message,
                     mobile_number:req.body.mobile_number,
@@ -24,6 +26,7 @@ async function RequestController(fastify,options){
                 {
                     Person.findByIdAndUpdate(req.user._id,{$push:{
                         enquires:{
+                            _id:shortid.generate(),
                             product_name:req.body.product_name,
                             message:req.body.message,
                             mobile_number:req.body.mobile_number ,
@@ -48,6 +51,32 @@ async function RequestController(fastify,options){
             })
         }
     })
+   /* fastify.route({
+        method:'POST',
+        url:'/reply',
+        preValidation:(req,res,done)=>authorize(req,res,done),
+        handler:(req,res)=>{
+            Person.findByIdAndUpdate(req.body.sender_id,{$push:{
+                notifications:{
+                    product_name:req.body.product_name,
+                    message:req.body.message,
+                    mobile_number:req.body.mobile_number,
+                    sender_id:req.user._id
+                }
+            }},{new:true}).exec((err,result)=>{
+                if(err)
+                {
+                    res.send({message:"Something went wrong"})
+                }
+                else
+                {
+                    Person.findByIdAndUpdate(req.user._id,{$pull:{
+
+                    }})
+                }
+            })
+        }
+    })*/
     fastify.route({
         method:'POST',
         url:'/product_buy_request',
@@ -55,6 +84,7 @@ async function RequestController(fastify,options){
         handler:(req,res)=>{
             Person.findByIdAndUpdate(req.body.seller_id,{$push:{
                 notifications:{
+                    _id:shortid.generate(),
                     product_name:req.body.product_name,
                     cost:req.body.cost,
                     unit:req.body.unit,
@@ -72,6 +102,7 @@ async function RequestController(fastify,options){
                 {
                     Person.findByIdAndUpdate(req.user._id,{$push:{
                         enquires:{
+                            _id:shortid.generate(),
                             product_name:req.body.product_name,
                             cost:req.body.cost,
                             unit:req.body.unit,
