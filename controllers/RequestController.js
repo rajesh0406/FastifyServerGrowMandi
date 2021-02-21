@@ -30,7 +30,7 @@ async function RequestController(fastify,options){
                             enquired_product:req.body.enquired_product
                         }
                     }},{new:true}).exec((eer,result)=>{
-                        if(eerr)
+                        if(eer)
                         {
                             res.send({message:"Somethong went wrong"})
                         }
