@@ -54,7 +54,7 @@ async function RequestController(fastify,options){
         preValidation:(req,res,done)=>authorize(req,res,done),
         handler:(req,res)=>{
             Person.findByIdAndUpdate(req.body.seller_id,{$push:{
-                enquiry:{
+                others_buy_request:{
                     product_name:req.body.product_name,
                     cost:req.body.cost,
                     unit:req.body.unit,
@@ -69,8 +69,28 @@ async function RequestController(fastify,options){
                 }
                 else
                 {
+                    Person.findByIdAndUpdate(req.user._id,{$push:{
+                        my_buy_request:{
+                            product_name:req.body.product_name,
+                            cost:req.body.cost,
+                            unit:req.body.unit,
+                            price_validity_date:req.body.price_validity_date,
+                            quality_terms:req.body.quality_terms,
+                            mobile_number:req.body.mobile_number,
+                            buy_request_product:req.body.buy_request_product
+                        }
+                    }},{new:true}).exec((errr,results)=>{
+                        if(errr)
+                        {
+                            res.send({message:'Something went wrong'})
+                        }
+                        else
+                        {
+                            res.send({message:'Buy Request sent'})
+                        }
+                    })
 
-                    res.send({message:"Enquiry sent"})
+                  
                 }
             })
         }

@@ -61,10 +61,10 @@ const PersonSchema =mongoose.Schema({
             type:String,
             required:true
         },
-        enquired_product:[{
+        enquired_product:{
             type:Object,
             required:true
-        }],
+        },
         message:{
             type:String,
             required:true
@@ -99,6 +99,10 @@ const PersonSchema =mongoose.Schema({
         quality_terms:{
             type:String,
             default:"Good quality"
+        },
+        sender_id:{
+            type:ObjectId,
+            required:true
         }
     }],
     my_buy_request:[{
@@ -125,6 +129,10 @@ const PersonSchema =mongoose.Schema({
         quality_terms:{
             type:String,
             default:"Good quality"
+        },
+        buy_request_product:{
+            type:Object,
+            required:true
         }
     }]
  
