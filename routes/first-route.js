@@ -1,6 +1,6 @@
 async function firstRoute(fastify,options){
     fastify.get('/first-route',async (req,res)=>{
-        res.send({route:"first-route-changed"})
+        res.send({route:"first-route-changed-3"})
 
     })
   
