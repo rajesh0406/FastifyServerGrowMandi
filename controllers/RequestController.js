@@ -12,7 +12,8 @@ async function RequestController(fastify,options){
                 others_enquiry:{
                     product_name:req.body.product_name,
                     message:req.body.message,
-                    mobile_number:req.body.mobile_number
+                    mobile_number:req.body.mobile_number,
+                    sender_id:req.user._id
                 }
             }},{new:true}).exec((err,result)=>{
                 Person.findByIdAndUpdate(req.user._id,{$push:{

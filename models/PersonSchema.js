@@ -50,6 +50,10 @@ const PersonSchema =mongoose.Schema({
             type:Number,
             required:true
 
+        },
+        sender_id:{
+            type:ObjectId,
+            required:true
         }
     }],
     my_enquiry:[{
