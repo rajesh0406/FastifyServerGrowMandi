@@ -134,6 +134,14 @@ const PersonSchema =mongoose.Schema({
             type:Object,
             required:true
         }
+    }],
+    notifications:[{
+        type:Object,
+        required:true
+    }],
+    enquires:[{
+        type:Object,
+        required:true
     }]
  
 })

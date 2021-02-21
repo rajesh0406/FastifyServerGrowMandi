@@ -9,7 +9,7 @@ async function RequestController(fastify,options){
         preValidation:(req,res,done)=>authorize(req,res,done),
         handler:(req,res)=>{
             Person.findByIdAndUpdate(req.body.seller_id,{$push:{
-                others_enquiry:{
+                notifications:{
                     product_name:req.body.product_name,
                     message:req.body.message,
                     mobile_number:req.body.mobile_number,
@@ -23,7 +23,7 @@ async function RequestController(fastify,options){
                 else
                 {
                     Person.findByIdAndUpdate(req.user._id,{$push:{
-                        my_enquiry:{
+                        enquires:{
                             product_name:req.body.product_name,
                             message:req.body.message,
                             mobile_number:req.body.mobile_number ,
@@ -54,7 +54,7 @@ async function RequestController(fastify,options){
         preValidation:(req,res,done)=>authorize(req,res,done),
         handler:(req,res)=>{
             Person.findByIdAndUpdate(req.body.seller_id,{$push:{
-                others_buy_request:{
+                notifications:{
                     product_name:req.body.product_name,
                     cost:req.body.cost,
                     unit:req.body.unit,
@@ -71,7 +71,7 @@ async function RequestController(fastify,options){
                 else
                 {
                     Person.findByIdAndUpdate(req.user._id,{$push:{
-                        my_buy_request:{
+                        enquires:{
                             product_name:req.body.product_name,
                             cost:req.body.cost,
                             unit:req.body.unit,
