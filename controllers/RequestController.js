@@ -51,13 +51,14 @@ async function RequestController(fastify,options){
             })
         }
     })
-   /* fastify.route({
+    fastify.route({
         method:'POST',
         url:'/reply',
         preValidation:(req,res,done)=>authorize(req,res,done),
         handler:(req,res)=>{
             Person.findByIdAndUpdate(req.body.sender_id,{$push:{
                 notifications:{
+                    _id:shortid.generate(),
                     product_name:req.body.product_name,
                     message:req.body.message,
                     mobile_number:req.body.mobile_number,
@@ -71,12 +72,21 @@ async function RequestController(fastify,options){
                 else
                 {
                     Person.findByIdAndUpdate(req.user._id,{$pull:{
-
-                    }})
+                        notifications:req.body._id
+                    }},{new:true}).then((errr,result)=>{
+                        if(errr)
+                        {
+                            res.send({message:'Something went wrong'})
+                        }
+                        else
+                        {
+                            res.send({message:"Reply sent"})
+                        }
+                    })
                 }
             })
         }
-    })*/
+    })
     fastify.route({
         method:'POST',
         url:'/product_buy_request',
