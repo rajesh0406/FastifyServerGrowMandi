@@ -57,6 +57,10 @@ const PersonSchema =mongoose.Schema({
             type:String,
             required:true
         },
+        enquired_product:[{
+            type:Object,
+            required:true
+        }],
         message:{
             type:String,
             required:true

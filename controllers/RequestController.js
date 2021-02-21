@@ -19,7 +19,8 @@ async function RequestController(fastify,options){
                     my_enquiry:{
                         product_name:req.body.product_name,
                         message:req.body.message,
-                        mobile_number:req.body.mobile_number 
+                        mobile_number:req.body.mobile_number ,
+                        enquired_product:req.body.enquired_product
                     }
                 }},{new:true}).exec((eer,result)=>{
                     if(eerr)
