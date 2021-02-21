@@ -16,25 +16,34 @@ async function RequestController(fastify,options){
                     sender_id:req.user._id
                 }
             }},{new:true}).exec((err,result)=>{
-                Person.findByIdAndUpdate(req.user._id,{$push:{
-                    my_enquiry:{
-                        product_name:req.body.product_name,
-                        message:req.body.message,
-                        mobile_number:req.body.mobile_number ,
-                        enquired_product:req.body.enquired_product
-                    }
-                }},{new:true}).exec((eer,result)=>{
-                    if(eerr)
-                    {
-                        res.send({message:"Somethong went wrong"})
-                    }
-                    else
-                    {
+                if(err)
+                {
+                    res.send({message:"Somethong went wrong"})
+                }
+                else
+                {
+                    Person.findByIdAndUpdate(req.user._id,{$push:{
+                        my_enquiry:{
+                            product_name:req.body.product_name,
+                            message:req.body.message,
+                            mobile_number:req.body.mobile_number ,
+                            enquired_product:req.body.enquired_product
+                        }
+                    }},{new:true}).exec((eer,result)=>{
+                        if(eerr)
+                        {
+                            res.send({message:"Somethong went wrong"})
+                        }
+                        else
+                        {
+        
+                            res.send({message:"Enquiry sent"})
+                        }
     
-                        res.send({message:"Enquiry sent"})
-                    }
+                    })
 
-                })
+                }
+               
                
             })
         }
