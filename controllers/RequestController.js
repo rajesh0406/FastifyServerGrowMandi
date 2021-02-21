@@ -130,6 +130,24 @@ async function RequestController(fastify,options){
             })
         }
     })
+    fastify.route({
+        method:'GET',
+        url:'/myinfo',
+        preValidation:(req,res,done)=>authorize(req,res,done),
+        handler:(req,res)=>{
+            Person.findById(req.user._id,(err,result)=>{
+                if(err)
+                {
+                    res.send({message:'Something went wrong'})
+                }
+                else
+                {
+                    res.send(result)
+                }
+            })
+        }
+    })
+  
 
 }
 module.exports=RequestController;

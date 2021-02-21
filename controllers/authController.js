@@ -64,5 +64,6 @@ async function AuthController(fastify,options){
             }
         })
     })
+   
 }
 module.exports=AuthController;
