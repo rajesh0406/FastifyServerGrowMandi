@@ -60,7 +60,8 @@ async function RequestController(fastify,options){
                     unit:req.body.unit,
                     price_validity_date:req.body.price_validity_date,
                     quality_terms:req.body.quality_terms,
-                    mobile_number:req.body.mobile_number
+                    mobile_number:req.body.mobile_number,
+                    sender_id:req.user._id
                 }
             }},{new:true}).exec((err,result)=>{
                 if(err)
