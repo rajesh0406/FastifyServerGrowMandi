@@ -58,7 +58,7 @@ async function RequestController(fastify,options){
         handler:(req,res)=>{
             Person.findByIdAndUpdate("6030021ae7321000156014b0",{$pull:{
                 notifications:{
-                    _id:'08p-x3UGJ'
+                    _id:'OEH8vz-HZ'
                 }
             }},{new:true}).exec((Err,result)=>{
                 if(Err)
