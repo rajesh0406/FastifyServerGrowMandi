@@ -9,12 +9,19 @@ async function RequestController(fastify,options){
         preValidation:(req,res,done)=>authorize(req,res,done),
         handler:(req,res)=>{
             Person.findByIdAndUpdate(req.body.seller_id,{$push:{
-                enquiry:{
+                others_enquiry:{
                     product_name:req.body.product_name,
                     message:req.body.message,
                     mobile_number:req.body.mobile_number
                 }
             }},{new:true}).exec((err,result)=>{
+                Person.findByIdAndUpdate(req.user._id,{$push:{
+                    my_enquiry:{
+                        product_name:req.body.product_name,
+                        message:req.body.message,
+                        mobile_number:req.body.mobile_number 
+                    }
+                }},{new:true}).exec({})
                 if(err)
                 {
                     res.send({message:"Somethong went wrong"})

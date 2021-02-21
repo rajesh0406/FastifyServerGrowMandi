@@ -52,7 +52,7 @@ const PersonSchema =mongoose.Schema({
 
         }
     }],
-    enquiry:[{
+    my_enquiry:[{
         product_name:{
             type:String,
             required:true
@@ -93,7 +93,7 @@ const PersonSchema =mongoose.Schema({
             default:"Good quality"
         }
     }],
-    buy_request:[{
+    my_buy_request:[{
         product_name:{
             type:String,
             required:true
