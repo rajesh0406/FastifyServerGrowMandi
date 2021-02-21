@@ -91,6 +91,29 @@ async function RequestController(fastify,options){
     })
     fastify.route({
         method:'POST',
+        url:'/ignore',
+        preValidation:(req,res,done)=>authorize(req,res,done),
+        handler:(req,res)=>{
+            Person.findByIdAndUpdate(req.user._id,{$pull:{
+                notifications:{
+                    _id:req.body._id
+                }
+            }},{new:true}).exec((Err,result)=>{
+                if(Err)
+                {
+                    res.send({message:'Something went wrong'})
+                }
+                else
+                {
+                    res.send({message:'Data ignored'})
+                }
+
+            })
+        }
+
+    })
+    fastify.route({
+        method:'POST',
         url:'/product_buy_request',
         preValidation:(req,res,done)=>authorize(req,res,done),
         handler:(req,res)=>{
